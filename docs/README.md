@@ -6,7 +6,9 @@ Enterprise-level builds use custom logic like traversal to convey how they shoul
 SlnGen reads the project references of a given project to create a Visual Studio solution on demand.  For example, you can run it against a unit test project and be presented with a Visual Studio solution containing the unit test project and all of its project references.  You can also run SlnGen against a traversal project in a rooted folder to open a Visual Studio solution containing that view of your project tree.
 
 # Getting Started (.NET Core Global Tool)
-SlnGen can be installed as a .NET Core global tool.  To do this, please install .NET Core 3.0 or above and run the following command:
+Download and Install Visual Studio 2019 Version 16.0 or greater. See [Installation](https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes).
+
+SlnGen can be installed as a .NET Core global tool.  To do this, please install [.NET Core 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0) or above and run the following command:
 
 ```cmd
 dotnet tool install --global Microsoft.VisualStudio.SlnGen.Tool
@@ -51,6 +53,12 @@ slngen [switches] [project]
 | <code>--binarylogger[:params]</code> | | Serializes all build events to a compressed binary file. By default the file is in the current directory and named `slngen.binlog` and contains the source text of project files, including all imported projects and target files encountered during the build. |
 | <code>--logger:params</code> | | Use this logger to log events from SlnGen. To specify multiple loggers, specify each logger separately.<br/>&nbsp;&nbsp;The `<params>` syntax is:<br/>&nbsp;&nbsp;  `[<class>,]<assembly>[;<parameters>]`<br/>&nbsp;&nbsp;The `<logger class>` syntax is:<br/>&nbsp;&nbsp;  `[<partial or full namespace>.]<logger class name>`<br/>&nbsp;&nbsp;The `<logger assembly>` syntax is:<br/>&nbsp;&nbsp;  `{<assembly name>[,<strong name>] | <assembly file>}`<br/>&nbsp;&nbsp;Logger options specify how SlnGen creates the logger. The `<logger parameters>` are optional, and are passed to the logger exactly as you typed them.|
   | <code>--nologo</code> | | Disables writing the SlnGen version and copyright information to the console. |
+
+# Getting started (CoreXT)
+Include slngen in your corext.config file
+```xml
+  <package id="SlnGen.Corext" version="3.0.37" />
+```
 
 # Getting Started (MSBuild Target)
 SlnGen is an MSBuild target so you will need to add a `<PackageReference />` to all projects that you want use it with.  We recommend that you simply add the `PackageReference` to a common import like [Directory.Build.props](https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build#directorybuildprops-example)
